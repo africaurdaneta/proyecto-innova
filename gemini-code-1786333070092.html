@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innova Sys - Acceso al Sistema</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0f172a, #1e293b); height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .auth-card { background: #fff; padding: 30px; border-radius: 12px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .auth-card h2 { text-align: center; color: #1e293b; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.85rem; color: #64748b; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #3b82f6; }
+        .btn { width: 100%; padding: 11px; background-color: #3b82f6; color: #fff; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background-color: #2563eb; }
+        .switch-text { text-align: center; margin-top: 15px; font-size: 0.85rem; color: #64748b; }
+        .switch-text a { color: #3b82f6; text-decoration: none; font-weight: bold; cursor: pointer; }
+        .error-msg { color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card">
+        <!-- FORMULARIO DE LOGIN -->
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <h2><i class="fa-solid fa-industry"></i> Innova Sys</h2>
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" id="loginEmail" required placeholder="correo@empresa.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="loginPassword" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn">Iniciar Sesión</button>
+            <p class="switch-text">¿No tienes cuenta? <a onclick="toggleForms()">Regístrate aquí</a></p>
+        </form>
+
+        <!-- FORMULARIO DE REGISTRO -->
+        <form id="registerForm" class="hidden" onsubmit="handleRegister(event)">
+            <h2><i class="fa-solid fa-user-plus"></i> Crear Cuenta</h2>
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" id="regName" required pattern="[A-Za-zÀ-ÿ\s]+" title="Solo letras y espacios">
+                <div class="error-msg" id="errName">Ingrese un nombre válido (solo letras).</div>
+            </div>
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" id="regEmail" required placeholder="correo@empresa.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña (Mínimo 6 caracteres)</label>
+                <input type="password" id="regPassword" required minlength="6">
+            </div>
+            <div class="form-group">
+                <label>Nivel de Usuario / Rol</label>
+                <select id="regRole">
+                    <option value="Basico">Usuario Básico (Pedidos y Técnicos)</option>
+                    <option value="Administrador">Administrador (Acceso Total)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Registrarse</button>
+            <p class="switch-text">¿Ya tienes cuenta? <a onclick="toggleForms()">Inicia sesión</a></p>
+        </form>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>
